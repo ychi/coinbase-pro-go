@@ -1,0 +1,2 @@
+conf/*
+!conf/conf.example.go
