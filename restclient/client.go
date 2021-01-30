@@ -137,6 +137,30 @@ func (rc *restClient) request (
 	req.Header.Add("User-Agent", "Coinbase Pro go")
 
 	res, err = rc.client.Do(req)
+
+	if err != nil {
+		return res, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		serverErr := Error{}
+		decoder := json.NewDecoder(res.Body)
+		err := decoder.Decode(&serverErr)
+		if err != nil {
+			return res, err
+		}
+		return res, error(serverErr)
+	}
+
+	if result != nil {
+		decoder := json.NewDecoder(res.Body)
+		err := decoder.Decode(result)
+		if err != nil {
+			return res, err
+		}
+	}
+
 	return res, err
 }
 

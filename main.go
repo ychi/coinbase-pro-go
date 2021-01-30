@@ -2,8 +2,10 @@ package main
 import (
 	"io"
 	"os"
+	"fmt"
 	"github.com/ychi/cbpgo/conf"
 	"github.com/ychi/cbpgo/restclient"
+	"github.com/ychi/cbpgo/market"
 )
 
 
@@ -50,7 +52,15 @@ func main() {
 	SetApiSecret(conf.API_SECRET).
 	SetApiPassphrase(conf.PASS_PHRASE)
 	
-	view(rest)
-	orders(rest)
-	withdraw(rest)
+	productSvc := market.NewProductService(rest)
+	products, _ := productSvc.List()
+	for _, p := range products {
+		productSvc.GetBook(p.Id, 1)
+	}
+
+	ticker, _ := productSvc.GetTicker("BTC-USD")
+
+	fmt.Println(ticker)
+
+	
 }
