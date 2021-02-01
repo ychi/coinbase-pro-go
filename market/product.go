@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/ychi/cbpgo/common"
-	"github.com/ychi/cbpgo/restclient"
+	"github.com/ychi/coinbase-pro-go/common"
+	"github.com/ychi/coinbase-pro-go/restclient"
 )
 
 type Product struct {

@@ -7,7 +7,7 @@ import (
 	"time"
 	"fmt"
 	"strconv"
-	"github.com/ychi/cbpgo/signature"
+	"github.com/ychi/coinbase-pro-go/signature"
 )
 
 

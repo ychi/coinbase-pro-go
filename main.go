@@ -3,9 +3,9 @@ import (
 	"io"
 	"os"
 	"fmt"
-	"github.com/ychi/cbpgo/conf"
-	"github.com/ychi/cbpgo/restclient"
-	"github.com/ychi/cbpgo/market"
+	"github.com/ychi/coinbase-pro-go/conf"
+	"github.com/ychi/coinbase-pro-go/restclient"
+	"github.com/ychi/coinbase-pro-go/market"
 )
 
 

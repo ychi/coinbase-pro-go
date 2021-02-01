@@ -1,3 +1,3 @@
-# cbpgo
+# coinbase-pro-go
 
-A Go implementation of Coinbase Pro API client.
+Coinbase Pro API client, implemented in Go.
