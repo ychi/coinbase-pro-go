@@ -7,7 +7,7 @@ import (
 
 type Time time.Time
 
-func (t *Time) Time() time.Time{
+func (t *Time) Time() time.Time {
 	return time.Time(*t)
 }
 
@@ -47,4 +47,3 @@ func (t *Time) UnmarshalJSON(b []byte) error {
 	*t = Time(parsed)
 	return nil
 }
-

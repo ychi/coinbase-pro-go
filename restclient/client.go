@@ -3,13 +3,12 @@ package restclient
 import (
 	"bytes"
 	"encoding/json"
-	"net/http"
-	"time"
 	"fmt"
-	"strconv"
 	"github.com/ychi/coinbase-pro-go/signature"
+	"net/http"
+	"strconv"
+	"time"
 )
-
 
 type RestClient interface {
 	Request(
@@ -21,13 +20,13 @@ type RestClient interface {
 }
 
 type restClient struct {
-	client *http.Client
-	baseURL string
-	apiKey string
-	apiSecret string
+	client        *http.Client
+	baseURL       string
+	apiKey        string
+	apiSecret     string
 	apiPassphrase string
-	retryCount int
-	timeout int
+	retryCount    int
+	timeout       int
 }
 
 func NewRestClient() *restClient {
@@ -35,7 +34,7 @@ func NewRestClient() *restClient {
 		client: &http.Client{
 			Timeout: 5 * time.Second,
 		},
-		baseURL: "https://api-public.sandbox.pro.coinbase.com",
+		baseURL:    "https://api-public.sandbox.pro.coinbase.com",
 		retryCount: 3,
 	}
 }
@@ -75,11 +74,11 @@ func (rc *restClient) Request(
 	path string,
 	query map[string]string,
 	params, result interface{},
-	) (
-		res *http.Response, 
-		err error,
-		) {
-	for i:= 0; i <= rc.retryCount; i++ {
+) (
+	res *http.Response,
+	err error,
+) {
+	for i := 0; i <= rc.retryCount; i++ {
 		res, err = rc.request(method, path, query, params, result)
 
 		if res != nil && res.StatusCode == 429 {
@@ -92,15 +91,15 @@ func (rc *restClient) Request(
 	return res, err
 }
 
-func (rc *restClient) request (
-	method string, 
+func (rc *restClient) request(
+	method string,
 	path string,
 	query map[string]string,
 	params, result interface{},
 ) (
 	res *http.Response,
 	err error,
-){
+) {
 	fullURL := fmt.Sprintf("%s%s", rc.baseURL, path)
 	var pBytes []byte
 	if params != nil {
@@ -163,4 +162,3 @@ func (rc *restClient) request (
 
 	return res, err
 }
-
